@@ -6,6 +6,6 @@ $(document).ready(function() {
 
 	for ( i = 0; i < jsonData["result"]["upcoming"].length; i++ ) {
 		var temp = jsonData["result"]["upcoming"][i];  
-		$('.upcoming').append("<div class=\"post-preview\"><a href=\""+temp.url+"\"><h2 class=\"post-title\">"+temp.Name+"</h2><h3 class=\"post-subtitle\">"+temp["Duration"]+"</h3></a><p class=\"post-meta\">Hosted by "+temp.Platform+"  | Starts: "+temp.StartTime+"</p><hr>");
+		$('.upcoming').append("<div class=\"post-preview\"><a href=\""+temp.url+"\"><h2 class=\"post-title\">"+temp.Name+"</h2><h3 class=\"post-subtitle\">Duration: "+temp["Duration"]+"</h3></a><p class=\"post-meta\">Hosted by "+temp.Platform+"  | Starts: "+temp.StartTime+"</p><hr>");
 	}
 });
