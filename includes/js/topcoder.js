@@ -1,4 +1,4 @@
-#(document).ready(function() {
+$(document).ready(function() {
 	var req = new XMLHttpRequest();
 	req.open("GET", "http://contesttrackerapi.herokuapp.com/", false);
 	req.send();
