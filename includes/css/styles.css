@@ -308,7 +308,10 @@ footer a:hover {
 	footer {
 		text-align: center;
 	}
-
+	
+	#pager-container {
+		text-align: center;
+	}
 	/* Custom */
 }
 
