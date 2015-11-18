@@ -8,6 +8,7 @@ $(document).ready(function () {
 
   for (var i = 0; i < jsonData['result']['upcoming'].length; i++) {
     var temp = jsonData['result']['upcoming'][i]
-    $('.upcoming').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2><h3 class=\'post-subtitle\'>Duration: ' + temp['Duration'] + '</h3></a><p class=\'post-meta\'>Hosted by ' + temp.Platform + '  | Starts: ' + temp.StartTime + '</p><hr>')
+    var extLink = temp.Platform.toLowerCase()
+    $('.upcoming').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2><h3 class=\'post-subtitle\'>Duration: ' + temp['Duration'] + '</h3></a><p class=\'post-meta\'>Hosted by <a href=\'http://codingcalendar.com/' + extLink + '\'>' + temp.Platform + '</a>  | Starts: ' + temp.StartTime + '</p><hr>')
   }
 })
