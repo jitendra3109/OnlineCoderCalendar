@@ -26,7 +26,7 @@ $(document).ready(function () {
   var i, temp
   for (i = 0; i < jsonData['result']['ongoing'].length; i++) {
     temp = jsonData['result']['ongoing'][i]
-    var endTime = changeTimezone(temp.EndTime).toString.slice(0, 21)
+    var endTime = changeTimezone(temp.EndTime).toString().slice(0, 21)
     if (temp.Platform !== targetPlatform) {
       continue
     }
@@ -34,7 +34,7 @@ $(document).ready(function () {
   }
   for (i = 0; i < jsonData['result']['upcoming'].length; i++) {
     temp = jsonData['result']['upcoming'][i]
-    var startTime = changeTimezone(temp.StartTime).toString.slice(0, 21)
+    var startTime = changeTimezone(temp.StartTime).toString().slice(0, 21)
     if (temp['Platform'] !== targetPlatform) {
       continue
     }
