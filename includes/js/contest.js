@@ -1,5 +1,12 @@
 /* globals $ XMLHttpRequest */
 
+function changeTimezone (date) {
+  var d = new Date(date)
+  var offset = -(d.getTimezoneOffset())
+  var newDate = new Date(d.getTime() + offset * 60000 - 19800000)
+  return newDate
+}
+
 function parse_url (url) {
   var matches = url.match(/\.com\/(.*)$/)
   var res = matches[1]
@@ -19,17 +26,19 @@ $(document).ready(function () {
   var i, temp
   for (i = 0; i < jsonData['result']['ongoing'].length; i++) {
     temp = jsonData['result']['ongoing'][i]
+    var endTime = changeTimezone(temp.EndTime).toString.slice(0, 21)
     if (temp.Platform !== targetPlatform) {
       continue
     }
-    $('.ongoing').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2></a><p class=\'post-meta\'>Hosted by ' + temp.Platform + '  | Ends: ' + temp.EndTime + '</p><hr>')
+    $('.ongoing').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2></a><p class=\'post-meta\'>Hosted by ' + temp.Platform + '  | Ends: ' + endTime + '</p><hr>')
   }
   for (i = 0; i < jsonData['result']['upcoming'].length; i++) {
     temp = jsonData['result']['upcoming'][i]
+    var startTime = changeTimezone(temp.StartTime).toString.slice(0, 21)
     if (temp['Platform'] !== targetPlatform) {
       continue
     }
-    $('.upcoming').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2><h3 class=\'post-subtitle\'>Duration: ' + temp['Duration'] + '</h3></a><p class=\'post-meta\'>Hosted by ' + temp.Platform + '  | Starts: ' + temp.StartTime + '</p><hr>')
+    $('.upcoming').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2><h3 class=\'post-subtitle\'>Duration: ' + temp['Duration'] + '</h3></a><p class=\'post-meta\'>Hosted by ' + temp.Platform + '  | Starts: ' + startTime + '</p><hr>')
   }
 })
 
