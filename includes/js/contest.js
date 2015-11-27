@@ -1,4 +1,4 @@
-/* globals $ XMLHttpRequest */
+/* globals NProgress $ XMLHttpRequest */
 
 function changeTimezone (date) {
   var d = new Date(date)
@@ -21,12 +21,14 @@ function parse_url (url) {
 
 $(document).ready(function () {
   var req = new XMLHttpRequest()
+  NProgress.start()
   req.onload = function () {
     try {
       var url = window.location.href
       var targetPlatform = parse_url(url).toUpperCase()
       var i, temp
       var jsonData = JSON.parse(this.responseText)
+      NProgress.inc()
       for (i = 0; i < jsonData['result']['ongoing'].length; i++) {
         temp = jsonData['result']['ongoing'][i]
         var endTime = changeTimezone(temp.EndTime).toString().slice(0, 21)
@@ -48,7 +50,9 @@ $(document).ready(function () {
       console.log(err)
       $('.ongoing').append('<div class=\'post-preview\' style=\'text-align: center\'><a href=\'' + '#' + '\'><h2 class=\'post-title\'>' + 'Oops! That request didn\'t go long!!' + '</h2><hr />')
     }
+    NProgress.done()
   }
   req.open('GET', 'http://contesttrackerapi.herokuapp.com/')
+  NProgress.set(0.4)
   req.send()
 })
