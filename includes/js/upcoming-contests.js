@@ -18,6 +18,9 @@ $(document).ready(function () {
         var temp = jsonData['result']['upcoming'][i]
         var startTime = changeTimezone(temp.StartTime).toString().slice(0, 21)
         var extLink = temp.Platform.toLowerCase()
+        if (temp.Platform === 'other') {
+          continue
+        }
         $('.upcoming').append('<div class=\'post-preview\'><a href=\'' + temp.url + '\'><h2 class=\'post-title\'>' + temp.Name + '</h2><h3 class=\'post-subtitle\'>Duration: ' + temp['Duration'] + '</h3></a><p class=\'post-meta\'>Hosted by <a href=\'http://codingcalendar.com/' + extLink + '\'>' + temp.Platform + '</a>  | Starts: ' + startTime + '</p><hr>')
       }
     } catch (err) {
